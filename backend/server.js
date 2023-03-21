@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const activityRouter = require('./routes/activity.route.js');
+const authRouter = require('./routes/auth.routes.js');
 
 const app = express(); 
 app.use(cors());
@@ -23,6 +24,7 @@ async function main() {
 };
 
 app.use('/api', activityRouter);
+app.use('/api/auth', authRouter);
 
 app.listen (PORT, () => {
   console.log(`Server running on ${PORT}`);
