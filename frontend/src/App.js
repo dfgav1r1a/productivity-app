@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [activities, setActivities] = useState([]);
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+  const token = localStorage.getItem('token');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ function App() {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${ token }`,
       },
       body: JSON.stringify(newActivity)
     });
@@ -30,13 +32,17 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${BACKEND_URL}/activities`);
+      const response = await fetch(`${BACKEND_URL}/activities`, 
+        {
+          headers: { Authorization: `Bearer ${token}`,
+          },
+        });
       const data = await response.json();
       setActivities(data);
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <div className="app">
