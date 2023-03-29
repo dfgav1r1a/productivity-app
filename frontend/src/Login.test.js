@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils'
-import App from './App';
+import Login from './Login';
 
 let container = null;
 
@@ -18,12 +18,13 @@ afterEach(() => {
 
 it('renders App component', () => {
   act(() => {
-    render(<App />, container);
+    render(<Login />, container);
 });
 
-expect(container.querySelector('h1').textContent).toBe('Productivity Tracker');
-expect(container.querySelector('label[for=\'activity\']').textContent).toBe('Activity:');
-expect(container.querySelector('label[for=\'time\']').textContent).toBe('Time Taken:');
-expect(container.querySelector('button').textContent).toBe('Add');
-});
+expect(container.querySelector('h1').textContent).toBe('Login');
+expect(container.querySelector('label[for=\'email\']').textContent).toBe('Email: ');
+expect(container.querySelector('label[for=\'password\']').textContent).toBe('Password: ');
+expect(container.querySelector('button').textContent).toBe('Login');
 
+
+});
