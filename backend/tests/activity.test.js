@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const testRequest = require('supertest');
 
-const app = require('../app');
+const app = require('../api');
 
 require('dotenv').config();
 

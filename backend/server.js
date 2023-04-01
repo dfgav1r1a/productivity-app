@@ -1,12 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
 const app = require('./api'); 
+const mongoose = require('mongoose');
 
 //load environment variable from .env
 require('dotenv').config();
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/productivity-tracker';
 const PORT = process.env.PORT || 5000;
 
 //connecting to DB

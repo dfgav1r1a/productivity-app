@@ -1,0 +1,43 @@
+services:
+  frontend:
+    image: dfgaviria/productivity-frontend
+    build: ./frontend
+    container_name: productivity-app-frontend
+    env_file: ./frontend/.env
+    networks:
+      - productivity-app-network
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/productivity-app-frontend
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+  backend:
+    image: dfgaviria/productivity-backend
+    build: ./backend
+    container_name: productivity-app-backend
+    environment:
+      MONGODB_URI: mongodb://productivity-app-db:27017/productivity-tracker
+    env_file: ./backend/.env
+    networks:
+      - productivity-app-network
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/productivity-app-backend
+    depends_on:
+      - productivity-app-db
+  productivity-app-db:
+    image: dfgaviria/productivity-db
+    build: ./MongoDB
+    container_name: productivity-app-DB
+    networks:
+      - productivity-app-network
+    ports: 
+      - "27017:27017"
+    
+networks:
+  productivity-app-network:
+    driver: bridge
